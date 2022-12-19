@@ -74,8 +74,7 @@
         				not null조건이 적용되어 있진않다. 따라서 첨부파일이 있을때만
         				다운로드 링크를 출력한다. -->
         					<c:if test="${ not empty row.ofile }">
-        						<a href="../mvcboard/download.do?ofile="${row.ofile }
-        							&sfile="${row.sfile }&idx=${row.idx}">[Down]</a>
+        						<a href="../mvcboard/download.do?ofile=${row.ofile }&sfile=${row.sfile }&idx=${row.idx}">[Down]</a>
         					</c:if>
         				</td>
         			</tr>
