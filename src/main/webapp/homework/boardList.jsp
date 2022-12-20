@@ -1,3 +1,4 @@
+<%@page import="utils.JSFunction"%>
 <%@page import="homework.hwDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
@@ -33,6 +34,21 @@ dao.close();
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">    
+	<script type="text/javascript">
+		function loginalr() {
+			<%
+			if(session.getAttribute("UserId")==null){
+			%>
+				alert("로그인 후 이용해주십시오.");
+				//location.href="./boardLoginForm.jsp";
+				response.sendRedirect("boardLoginForm.jsp");
+			<%
+			//JSFunction.alertLocation("로그인 후 이용해주십시오.","./boardLoginForm.jsp",out);
+			}
+			%>
+			
+		}
+	</script>
 </head>
 <body>
 <div class="container">
@@ -48,6 +64,14 @@ dao.close();
 
             <div class="row ">
                 <!-- 검색부분 -->
+                <%
+                if(session.getAttribute("UserId") != null &&
+                		session.getAttribute("UserId").toString().equals("musthave")){
+                %>
+                <input type="button" value="관리자페이지">
+                <%
+                }
+                %>
                 <form>
                     <div class="input-group ms-auto" style="width: 400px;">
                         <select name="keyField" class="form-control">
@@ -104,8 +128,8 @@ dao.close();
                     %>
                     	<tr>
                             <td class="text-center"><%=virtualNum%></td>
-                            <td class="text-left">
-                            	<a href="boardView.jsp?num=<%= dto.getNum()%>"><%=dto.getTitle() %></a></td>
+                            <td class="text-left" >
+                            	<a href="boardView.jsp?num=<%= dto.getNum()%>" onclick="loginalr();"><%=dto.getTitle() %></a></td>
                             <td class="text-center"><%=dto.getId() %></td>
                             <td class="text-center"><%=dto.getPostdate() %></td>
                             <td class="text-center"><%=dto.getVisitcount() %></td>
